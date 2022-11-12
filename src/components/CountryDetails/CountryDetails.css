@@ -1,4 +1,7 @@
-.bandeira{
-    display: flex;
-    justify-content: center;    
+.div-detalhes{
+    text-align: center;
+    width: 50vw;
+}
+.list-group{
+    text-align: left;
 }

@@ -1,5 +1,5 @@
 import './CountryDetails.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function CountryDetails({ countries }) {
   const { countryId } = useParams();
@@ -7,32 +7,34 @@ function CountryDetails({ countries }) {
   const foundCountry = countries.find((oneCountry) => {
     return oneCountry.alpha3Code === countryId;
   });
+  
+  const foundBorders = (border) => countries.find((oneCountry) => {
+    return oneCountry.alpha3Code === border;
+  });
 
-  //   const borders = [...foundCountry.borders]
-
-  //   const renderBorders = countries
-  //         .filter((oneCountry, index) => {
-  //             return countries.alpha3Code === foundCountry.borders[index]
-  //         })
-  //         .map()
-
+  
   return (
-    <div >
+    <div className="div-detalhes">
       <div className="bandeira">
         <img
-          src={`https://flagpedia.net/data/flags/icon/256x192/${foundCountry.alpha2Code.toLowerCase()}.png`} alt="..."/>
+          src={`https://flagpedia.net/data/flags/icon/256x192/${foundCountry.alpha2Code.toLowerCase()}.png`}
+          alt="..."
+        />
       </div>
 
       <div className="card-body">
         <h2 className="card-title">{foundCountry.name.common}</h2>
-        <p className="card-text">
-
-        </p>
+        <p className="card-text"></p>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item">Capital: {foundCountry.capital}</li>
-        <li className="list-group-item">Area: {foundCountry.area}Km&sup2;</li>
-        <li className="list-group-item">Borders: {foundCountry.borders}</li>
+        <li className="list-group-item"><b>Capital:</b> {foundCountry.capital}</li>
+        <li className="list-group-item"><b>Area:</b> {foundCountry.area}Km&sup2;</li>
+        <li className="list-group-item"><b>Borders:</b> {foundCountry.borders.map((border) =>{
+          return(             
+                  <Link to={`/${border}`}><br></br>{foundBorders(border).name.common} </Link>
+            )
+        })}
+       </li>
       </ul>
     </div>
   );

@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Navigationbar />
-      <div className="container">
+      <div className="container-fluid div-principal">
         <div className="lista-paises">
           <CountriesList countries={countries} />
         </div>
